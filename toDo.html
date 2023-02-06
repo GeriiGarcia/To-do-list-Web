@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            text-align: left;
+        }
+
+        div{
+            margin: 80px auto auto 80px;
+            text-align: center;
+        }
+
+        .lista{
+            border-width: thin;
+            border-color: black;
+            border-style: solid;
+            padding: 10px 30px 10px 30px;
+            width: max-content;
+            border-radius: 10px;
+        }
+
+        .tareas{
+            text-align: left;
+            margin: 10px auto;
+
+            width: 220px;
+            height: 50px;
+            background-color: #d8dbe0;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #000000;
+            text-align: center;
+            border: none;
+        }
+
+        .Atareas{
+            display: none;
+            margin: 10px auto;
+        }
+
+        .tarea{
+            display: flex;
+            text-align: center;
+            display: flex;
+            margin: 10px auto;
+        }
+
+        input {
+            display: none;
+        }
+
+    </style>
+
+    <script>
+        function pulsarAñadir(){
+            document.getElementById("añadirTarea").style.display = "flex";
+            
+        }
+    </script>
+</head>
+<body>
+
+    <div class="lista">
+        <button onclick="pulsarAñadir();" id="minusculas" class="tareas" id="añadirLista">
+            <input type = 'checkbox'>
+            <span class = 'slider'></span>
+            + Añadir Lista
+        </button>
+
+        <div class="Atareas" id="añadirTarea">
+            <input type="text" placeholder="Añadir tarea" class="tarea" >
+
+        </div>
+    </div>
+
+    
+</body>
+</html>
