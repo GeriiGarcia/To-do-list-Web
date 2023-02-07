@@ -56,32 +56,95 @@
             margin: 10px auto;
         }
 
+        #add{
+            width: 20px;
+            height: 20px;
+            margin: 10px auto;
+        }
+
         input {
             display: none;
+        }
+
+        li{
+            list-style-type: none;
         }
 
     </style>
 
     <script>
+        let numListas = 0;
+
+        function añadirNumLista() {numListas++; return numListas;}
+
         function pulsarAñadir(){
             document.getElementById("añadirTarea").style.display = "flex";
-            
+            clonar();
+            document.getElementById("añadirLista0").style.display = "none";
         }
+
+        function clonar(){
+          var c = document.getElementById("lista0");
+          var clon = c.cloneNode(true); //si es true se copia el sub arbol, osea todo el elemento entero
+          añadirNumLista()
+          
+          var x = "lista";
+          x.replace(x.length, '');
+          x = x + numListas.toString();
+          
+          //let childNodes = c.c.childNodes;
+          c.childNodes[0].id = c.childNodes[0].id + numListas.toString();
+          c.childNodes[1].id = c.childNodes[1].id + numListas.toString();
+          c.id = x;
+
+          //alert(c.innerHTML); 
+          document.body.appendChild(clon);
+        }
+
+        function añadirTarea(){
+            var li = document.createElement("li");
+            var inputValue = document.getElementById("myInput0").value;
+            var t = document.createTextNode(inputValue);
+            li.appendChild(t);
+            if (inputValue === '') {
+              alert("You must write something!");
+            } else {
+              document.getElementById("ListaTarea0").appendChild(li);
+            }
+            document.getElementById("myInput0").value = "";
+        
+            var span = document.createElement("SPAN");
+            /*var txt = document.createTextNode("\u00D7");*/
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
+        
+            for (i = 0; i < close.length; i++) {
+              close[i].onclick = function() {
+                var div = this.parentElement;
+                div.style.display = "none";
+              }
+            }
+        }
+
     </script>
 </head>
 <body>
 
-    <div class="lista">
-        <button onclick="pulsarAñadir();" id="minusculas" class="tareas" id="añadirLista">
+    <div class="lista" id="lista0">
+        <button onclick="pulsarAñadir();" class="tareas" id="añadirLista0">
             <input type = 'checkbox'>
             <span class = 'slider'></span>
             + Añadir Lista
         </button>
 
-        <div class="Atareas" id="añadirTarea">
-            <input type="text" placeholder="Añadir tarea" class="tarea" >
-
-        </div>
+        <ul id="ListaTarea0">
+            <li><div class="Atareas" id="añadirTarea">
+                <input type="text" placeholder="Añadir tarea" class="tarea" id="myInput0">
+                <button id="add" onclick="añadirTarea();" >+</button>
+            </div>
+        </li>    
+        </ul>
     </div>
 
     
