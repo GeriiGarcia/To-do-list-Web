@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,21 +8,21 @@
     <title>To Do List</title>
 
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
-
-        body{
+        
+        body {
             text-align: left;
         }
-
-        div{
+        
+        div {
             margin: 80px auto auto 80px;
             text-align: center;
         }
-
-        .lista{
+        
+        .lista {
             border-width: thin;
             border-color: black;
             border-style: solid;
@@ -29,11 +30,10 @@
             width: max-content;
             border-radius: 10px;
         }
-
-        .tareas{
+        
+        .tareas {
             text-align: left;
             margin: 10px auto;
-
             width: 220px;
             height: 50px;
             background-color: #d8dbe0;
@@ -43,92 +43,98 @@
             text-align: center;
             border: none;
         }
-
-        .Atareas{
+        
+        .Atareas {
             display: none;
             margin: 10px auto;
         }
-
-        .tarea{
+        
+        .tarea {
             display: flex;
             text-align: center;
             display: flex;
             margin: 10px auto;
         }
-
-        #add{
+        
+        #add {
             width: 20px;
             height: 20px;
             margin: 10px auto;
         }
-
+        
         input {
             display: none;
         }
-
-        li{
+        
+        li {
             list-style-type: none;
         }
-
     </style>
 
     <script>
         let numListas = 0;
 
-        function añadirNumLista() {numListas++; return numListas;}
+        function añadirNumLista() {
+            numListas++;
+            return numListas;
+        }
 
-        function pulsarAñadir(){
+        function pulsarAñadir() {
             document.getElementById("añadirTarea").style.display = "flex";
             clonar();
             document.getElementById("añadirLista0").style.display = "none";
         }
 
-        function clonar(){
-          var c = document.getElementById("lista0");
-          var clon = c.cloneNode(true); //si es true se copia el sub arbol, osea todo el elemento entero
-          añadirNumLista()
-          
-          var x = "lista";
-          x.replace(x.length, '');
-          x = x + numListas.toString();
-          
-          //let childNodes = c.c.childNodes;
-          c.childNodes[0].id = c.childNodes[0].id + numListas.toString();
-          c.childNodes[1].id = c.childNodes[1].id + numListas.toString();
-          c.id = x;
+        function clonar() {
+            var c = document.getElementById("lista0");
+            var clon = c.cloneNode(true); //si es true se copia el sub arbol, osea todo el elemento entero
+            añadirNumLista()
 
-          //alert(c.innerHTML); 
-          document.body.appendChild(clon);
+            var x = "lista";
+            x.replace(x.length, '');
+            x = x + numListas.toString();
+
+            var c0 = "añadirLista";
+            var c1 = "ListaTarea";
+
+
+            c.childNodes[0].id = c1 + numListas.toString();
+            c.childNodes[1].id = c0 + numListas.toString();
+
+            c.id = x;
+
+            //alert(c.innerHTML); 
+            document.body.appendChild(clon);
         }
 
-        function añadirTarea(){
+        function añadirTarea() {
             var li = document.createElement("li");
             var inputValue = document.getElementById("myInput0").value;
             var t = document.createTextNode(inputValue);
             li.appendChild(t);
             if (inputValue === '') {
-              alert("You must write something!");
+                alert("You must write something!");
             } else {
-              document.getElementById("ListaTarea0").appendChild(li);
+                document.getElementById("ListaTarea0").appendChild(li);
             }
             document.getElementById("myInput0").value = "";
-        
+
             var span = document.createElement("SPAN");
             /*var txt = document.createTextNode("\u00D7");*/
             span.className = "close";
             span.appendChild(txt);
             li.appendChild(span);
-        
+
             for (i = 0; i < close.length; i++) {
-              close[i].onclick = function() {
-                var div = this.parentElement;
-                div.style.display = "none";
-              }
+                close[i].onclick = function() {
+                    var div = this.parentElement;
+                    div.style.display = "none";
+                }
             }
         }
-
     </script>
 </head>
+
 <body>
 
     <div class="lista" id="lista0">
@@ -139,14 +145,16 @@
         </button>
 
         <ul id="ListaTarea0">
-            <li><div class="Atareas" id="añadirTarea">
-                <input type="text" placeholder="Añadir tarea" class="tarea" id="myInput0">
-                <button id="add" onclick="añadirTarea();" >+</button>
-            </div>
-        </li>    
+            <li>
+                <div class="Atareas" id="añadirTarea">
+                    <input type="text" placeholder="Añadir tarea" class="tarea" id="myInput0">
+                    <button id="add" onclick="añadirTarea();">+</button>
+                </div>
+            </li>
         </ul>
     </div>
 
-    
+
 </body>
+
 </html>
