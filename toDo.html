@@ -69,6 +69,7 @@
         li {
             list-style-type: none;
         }
+
     </style>
 
     <script>
@@ -101,28 +102,32 @@
         }
 
         function pulsarAñadir(num) {
-            document.getElementById("añadirTarea" + num.toString()).style.display = "flex";
             clonar();
-            document.getElementById("añadirLista" + num.toString()).style.display = "none";
+
+            if(num == 0)
+            {
+                aux = numListas;
+                document.getElementById("añadirTarea" + aux.toString()).style.display = "flex";
+                document.getElementById("añadirLista" + aux.toString()).style.display = "none";
+            }
+            else
+            {
+                document.getElementById("añadirTarea" + num.toString()).style.display = "flex";
+                document.getElementById("añadirLista" + num.toString()).style.display = "none";
+            }
         }
 
         function clonar() {
             var c = document.getElementById("lista0");
             var clon = c.cloneNode(true); //si es true se copia el sub arbol, osea todo el elemento entero
             añadirNumLista()
-            
-            /*var c0 = "añadirLista";
-            var c1 = "ListaTarea";
-            c.childNodes[0].id = c1 + numListas.toString();
-            c.childNodes[1].id = c0 + numListas.toString();
 
-            //alert(c.innerHTML); 
-            */
             c.innerHTML = nuevaL();
             var x = "lista";
             x.replace(x.length, '');
             x = x + numListas.toString();
             c.id = x;
+
             document.body.appendChild(clon);
         }
 
