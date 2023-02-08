@@ -14,7 +14,7 @@
         }
         
         body {
-            text-align: left;
+            text-align: center;
         }
         
         div {
@@ -23,10 +23,12 @@
         }
         
         .lista {
+            margin: 100px auto;
             border-width: thin;
             border-color: black;
             border-style: solid;
             padding: 10px 30px 10px 30px;
+            min-width: 500px;
             width: max-content;
             border-radius: 10px;
         }
@@ -54,12 +56,13 @@
             text-align: center;
             display: flex;
             margin: 10px auto;
+            width: 50%;
         }
         
         #add {
             width: 20px;
             height: 20px;
-            margin: 10px auto;
+            margin: 10px auto auto -100px;
         }
         
         input {
@@ -68,6 +71,7 @@
         
         li {
             list-style-type: none;
+            margin: 10px auto 10px auto;
         }
 
     </style>
@@ -78,7 +82,10 @@
         
    
         function nuevaL(){
-            let nuevaLista = `
+            let titulo = document.getElementById("tituloLista").value;
+            if(titulo == "")
+                titulo = "Lista";
+            let nuevaLista = `<p>` + titulo + `<\p>
             <button onclick="pulsarAñadir(` + numListas.toString() + `);" class="tareas" id="añadirLista` + numListas.toString() + `">
                 <input type = 'checkbox'>
                 <span class = 'slider'></span>
@@ -167,6 +174,7 @@
             <span class = 'slider'></span>
             + Añadir Lista
         </button>
+        <input type="text" placeholder="Titulo de lista" class="tarea" id="tituloLista">
 
         <ul id="ListaTarea0">
             <li>
