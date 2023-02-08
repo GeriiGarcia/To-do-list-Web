@@ -74,50 +74,69 @@
     <script>
         let numListas = 0;
 
+        
+   
+        function nuevaL(){
+            let nuevaLista = `
+            <button onclick="pulsarAñadir(` + numListas.toString() + `);" class="tareas" id="añadirLista` + numListas.toString() + `">
+                <input type = 'checkbox'>
+                <span class = 'slider'></span>
+                + Añadir Lista
+            </button>
+
+            <ul id="ListaTarea` + numListas.toString() + `">
+                <li>
+                    <div class="Atareas" id="añadirTarea` + numListas.toString() + `">
+                        <input type="text" placeholder="Añadir tarea" class="tarea" id="myInput` + numListas.toString() + `">
+                        <button id="add" onclick="añadirTarea(` + numListas.toString() + `);">+</button>
+                    </div>
+                </li>
+            </ul>`;
+            return nuevaLista;
+        }
+
         function añadirNumLista() {
-            numListas++;
+            numListas = numListas + 1;
             return numListas;
         }
 
-        function pulsarAñadir() {
-            document.getElementById("añadirTarea").style.display = "flex";
+        function pulsarAñadir(num) {
+            document.getElementById("añadirTarea" + num.toString()).style.display = "flex";
             clonar();
-            document.getElementById("añadirLista0").style.display = "none";
+            document.getElementById("añadirLista" + num.toString()).style.display = "none";
         }
 
         function clonar() {
             var c = document.getElementById("lista0");
             var clon = c.cloneNode(true); //si es true se copia el sub arbol, osea todo el elemento entero
             añadirNumLista()
-
-            var x = "lista";
-            x.replace(x.length, '');
-            x = x + numListas.toString();
-
-            var c0 = "añadirLista";
+            
+            /*var c0 = "añadirLista";
             var c1 = "ListaTarea";
-
-
             c.childNodes[0].id = c1 + numListas.toString();
             c.childNodes[1].id = c0 + numListas.toString();
 
-            c.id = x;
-
             //alert(c.innerHTML); 
+            */
+            c.innerHTML = nuevaL();
+            var x = "lista";
+            x.replace(x.length, '');
+            x = x + numListas.toString();
+            c.id = x;
             document.body.appendChild(clon);
         }
 
-        function añadirTarea() {
+        function añadirTarea(num) {
             var li = document.createElement("li");
-            var inputValue = document.getElementById("myInput0").value;
+            var inputValue = document.getElementById("myInput" + num.toString()).value;
             var t = document.createTextNode(inputValue);
             li.appendChild(t);
             if (inputValue === '') {
                 alert("You must write something!");
             } else {
-                document.getElementById("ListaTarea0").appendChild(li);
+                document.getElementById("ListaTarea" + num.toString()).appendChild(li);
             }
-            document.getElementById("myInput0").value = "";
+            document.getElementById("myInput" + num.toString()).value = "";
 
             var span = document.createElement("SPAN");
             /*var txt = document.createTextNode("\u00D7");*/
@@ -138,7 +157,7 @@
 <body>
 
     <div class="lista" id="lista0">
-        <button onclick="pulsarAñadir();" class="tareas" id="añadirLista0">
+        <button onclick="pulsarAñadir(0);" class="tareas" id="añadirLista0">
             <input type = 'checkbox'>
             <span class = 'slider'></span>
             + Añadir Lista
@@ -146,9 +165,9 @@
 
         <ul id="ListaTarea0">
             <li>
-                <div class="Atareas" id="añadirTarea">
+                <div class="Atareas" id="añadirTarea0">
                     <input type="text" placeholder="Añadir tarea" class="tarea" id="myInput0">
-                    <button id="add" onclick="añadirTarea();">+</button>
+                    <button id="add" onclick="añadirTarea(0);">+</button>
                 </div>
             </li>
         </ul>
