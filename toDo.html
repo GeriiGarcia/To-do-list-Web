@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <title>To Do List</title>
 
     <style>
@@ -75,8 +76,7 @@
         }
 
 
-    
-
+  
 /* Remove margins and padding from the list */
 ul {
   margin: 0;
@@ -118,7 +118,7 @@ ul li.checked {
 }
 
 /* Add a "checked" mark when clicked on */
-li.checked::before {
+.no.checked::before {
   content: '';
   position: absolute;
   border-color: #fff;
@@ -206,7 +206,6 @@ input {
             <input type="text" placeholder="Añadir tarea" class="tarea" id="myInput0">
             <button id="add" onclick="añadirTarea(0);">+</button>
         </div>
-        
         <ul id="ListaTarea0">
         </ul>
     </div>
@@ -239,9 +238,7 @@ input {
                 </div>
 
         <ul id="ListaTarea` + numListas.toString() + `">
-            
-               
-            
+        
         </ul>`;
         return nuevaLista;
     }
@@ -279,6 +276,7 @@ input {
         c.id = x;
 
         document.body.appendChild(clon);
+
     }
 
     function añadirTarea(num) {
@@ -286,6 +284,7 @@ input {
         var inputValue = document.getElementById("myInput" + num.toString()).value;
         var t = document.createTextNode(inputValue);
         li.appendChild(t);
+        li.className = 'no';
         if (inputValue === '') {
             alert("You must write something!");
         } else {
@@ -319,17 +318,19 @@ for (i = 0; i < close.length; i++) {
 
 }
 
-  
-        
-        list.addEventListener('click', function(ev) {
-            alert("sdadadad");
-          if (ev.target.tagName === 'LI') {
-            ev.target.classList.toggle('checked');
-          }
+/*añadir la classe checked cuando se pulsa en un li*/
           
-        }, false);
+document.addEventListener('click', function(ev) {
 
-
+if (ev.target.tagName === 'LI' && ev.target.className == 'no') {
+  ev.target.className = 'checked';
+}
+else if(ev.target.className == 'checked' && ev.target.tagName === 'LI')
+{
+  ev.target.className = 'no';
+}
+ }, false);
+ 
 
 
 </script>
