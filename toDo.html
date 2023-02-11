@@ -41,10 +41,10 @@
             height: 50px;
             background-color: #d8dbe0;
             border-radius: 5px;
-            cursor: pointer;
             color: #000000;
             text-align: center;
             border: none;
+            cursor: pointer;
         }
         
         .Atareas {
@@ -58,12 +58,15 @@
             display: flex;
             margin: 10px auto;
             width: 50%;
+            height: 20px;
+
         }
         
         #add {
             width: 20px;
             height: 20px;
             margin: 10px auto auto -100px;
+            cursor: pointer;
         }
         
         input {
@@ -76,91 +79,57 @@
             margin: 10px auto 10px auto;
         }
 
+        .titulo{
+            font-size: 18px;
+            padding: 10px;
+        }
 
-  
-/* Remove margins and padding from the list */
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-/* Style the list items */
-ul li {
-  cursor: pointer;
-  position: relative;
-  padding: 12px 8px 12px 40px;
-  list-style-type: none;
-  background: #eee;
-  font-size: 18px;
-  transition: 0.2s;
-  
-  /* make the list items unselectable */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd) {
-  background: #f9f9f9;
-}
-
-/* Darker background-color on hover */
-.lista ul li:hover {
-  background: #ddd;
-}
-
-/* When clicked on, add a background color and strike out text */
-ul li.checked {
-  background: #888;
-  color: #fff;
-  text-decoration: line-through;
-}
-
-/* Add a "checked" mark when clicked on */
-.no.checked::before {
-  content: '';
-  position: absolute;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
-  left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
-}
-
-/* Style the close button */
-.close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 12px 16px 12px 16px;
-}
-
-.close:hover {
-  background-color: #f44336;
-  color: white;
-}
-
-/* Style the header */
-.header {
-  background-color: #f44336;
-  padding: 30px 40px;
-  color: white;
-  text-align: center;
-}
-
-/* Clear floats after the header */
-.header:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-
+        /* Style the list items */
+        ul li {
+          cursor: pointer;
+          position: relative;
+          padding: 12px 8px 12px 40px;
+          list-style-type: none;
+          background: #eee;
+          font-size: 18px;
+          transition: 0.2s;
+        
+          /* make the list items unselectable */
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+        
+        /* Set all odd list items to a different color (zebra-stripes) */
+        ul li:nth-child(odd) {
+          background: #f9f9f9;
+        }
+        
+        /* Darker background-color on hover */
+        .lista ul li:hover {
+          background: #ddd;
+        }
+        
+        /* When clicked on, add a background color and strike out text */
+        ul li.checked {
+          background: #888;
+          color: #fff;
+          text-decoration: line-through;
+        }
+        
+        /* Style the close button */
+        .close {
+          position: absolute;
+          right: 0;
+          top: 0;
+          padding: 12px 16px 12px 16px;
+        }
+        
+        .close:hover {
+          background-color: #f44336;
+          color: white;
+        }
 
     </style>
 
@@ -187,20 +156,17 @@ ul li.checked {
 
 </body>
 
-
-
 </html>
 
 
 <script>
     let numListas = 0;
 
-
     function nuevaL(){
         let titulo = document.getElementById("tituloLista").value;
         if(titulo == "")
             titulo = "Lista";
-        let nuevaLista = `<p>` + titulo + `<\p>
+        let nuevaLista = `<p class="titulo">` + titulo + `<\p>
         <button onclick="pulsarAñadir(` + numListas.toString() + `);" class="tareas" id="añadirLista` + numListas.toString() + `">
             <input type = 'checkbox'>
             <span class = 'slider'></span>
@@ -225,7 +191,7 @@ ul li.checked {
 
     function pulsarAñadir(num) {
         clonar();
-
+        document.getElementById("tituloLista").value = ""; 
         if(num == 0)
         {
             aux = numListas;
@@ -284,28 +250,36 @@ ul li.checked {
     }
 
     var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
+    var i;
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+            }
 
-}
+    }
 
-/*añadir la classe checked cuando se pulsa en un li*/
-          
-document.addEventListener('click', function(ev) {
+    /*añadir o quitrar la classe checked cuando se pulsa en un li*/
 
-if (ev.target.tagName === 'LI' && ev.target.className == 'no') {
-  ev.target.className = 'checked';
-}
-else if(ev.target.className == 'checked' && ev.target.tagName === 'LI')
-{
-  ev.target.className = 'no';
-}
- }, false);
+    document.addEventListener('click', function(ev) {
+        if (ev.target.tagName === 'LI' && ev.target.className == 'no') 
+          ev.target.className = 'checked';
+        else if(ev.target.className == 'checked' && ev.target.tagName === 'LI')
+          ev.target.className = 'no';
+    }, false);
  
+
+    /*Pulsar enter y que pasen cosas*/
+
+    var input = document.getElementById("tituloLista"); 
+    // Execute a function when the user presses a key on the keyboard
+    input.addEventListener("keypress", function(event) {
+      // If the user presses the "Enter" key on the keyboard
+      if (event.key === "Enter") {
+        event.preventDefault();     // Cancel the default action, if needed
+        document.getElementById("añadirLista0").click();   // Trigger the button element with a click
+      }
+    });
 
 
 </script>
